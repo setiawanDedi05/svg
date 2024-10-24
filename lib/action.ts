@@ -3,10 +3,8 @@
 import { parseWithZod } from "@conform-to/zod";
 import { createAiShortSchema } from "./zodSchema";
 import axios from "axios";
-import { redirect } from "next/navigation";
 
 export async function CreateAiShortAction(prevState: any, formData: FormData) {
-  console.log({ formData });
   const submission = parseWithZod(formData, {
     schema: createAiShortSchema,
   });
