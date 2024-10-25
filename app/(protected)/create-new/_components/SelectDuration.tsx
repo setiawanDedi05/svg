@@ -39,6 +39,8 @@ export function SelectDuration({ name, formId }: ComponentProps) {
             <SelectValue placeholder="Select Topic" />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="5 seconds">5 Second</SelectItem>
+            <SelectItem value="15 seconds">15 Second</SelectItem>
             <SelectItem value="30 seconds">30 Second</SelectItem>
             <SelectItem value="60 seconds">60 Second</SelectItem>
           </SelectContent>
