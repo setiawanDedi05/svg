@@ -10,9 +10,11 @@ import { parseWithZod } from "@conform-to/zod";
 import { createAiShortSchema } from "@/lib/zodSchema";
 import { SelectDuration } from "./_components/SelectDuration";
 import { SelectStyle } from "./_components/SelectStyle";
+import { useLoadingStore } from "@/app/store/loading";
 
 export default function CreateNew() {
   const [lastResult, action] = useFormState(CreateAiShortAction, undefined);
+  const { showLoading, hideLoading } = useLoadingStore();
 
   const [form, fields] = useForm({
     id: "create-new",
@@ -30,7 +32,18 @@ export default function CreateNew() {
     <div className="flex flex-col">
       <h2 className="text-2xl font-bold text-primary">CreateNew</h2>
       <FormProvider context={form.context}>
-        <form action={action} id={form.id} onSubmit={form.onSubmit} noValidate>
+        <form
+          action={async (formData) => {
+            showLoading();
+            await action(formData);
+            setTimeout(() => {
+              hideLoading();
+            }, 5000)
+          }}
+          id={form.id}
+          onSubmit={form.onSubmit}
+          noValidate
+        >
           {/* select topic */}
           <SelectTopic name={fields.topic.name} formId={form.id} />
           {/* select style */}
