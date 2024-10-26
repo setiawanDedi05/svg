@@ -32,18 +32,7 @@ export default function CreateNew() {
     <div className="flex flex-col">
       <h2 className="text-2xl font-bold text-primary">CreateNew</h2>
       <FormProvider context={form.context}>
-        <form
-          action={async (formData) => {
-            showLoading();
-            await action(formData);
-            setTimeout(() => {
-              hideLoading();
-            }, 5000)
-          }}
-          id={form.id}
-          onSubmit={form.onSubmit}
-          noValidate
-        >
+        <form action={action} id={form.id} onSubmit={form.onSubmit} noValidate>
           {/* select topic */}
           <SelectTopic name={fields.topic.name} formId={form.id} />
           {/* select style */}

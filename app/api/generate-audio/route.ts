@@ -1,10 +1,8 @@
 import { storage } from "@/lib/firebaseConfig";
 import textToSpeech, { protos } from "@google-cloud/text-to-speech";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import fs from "fs";
 import { NextResponse } from "next/server";
 import _ from "underscore";
-import util from "util";
 
 const client = new textToSpeech.TextToSpeechClient({
   apiKey: process.env.GOOGLE_API_KEY,
