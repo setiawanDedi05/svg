@@ -19,4 +19,15 @@ model User {
   email String
   imageUrl String
   subscription Boolean @default(false)
+  videosData VideoData[]
+}
+
+model VideoData{
+  id String @id @default(cuid())
+  script Json
+  audioUrl String
+  caption Json
+  imageList String[]
+  createdBy String
+  user User @relation(fields: [createdBy], references: [id])
 }

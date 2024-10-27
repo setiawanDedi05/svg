@@ -16,13 +16,13 @@ export function SideNav() {
       icon: LayoutDashboardIcon,
     },
     {
-      id: 1,
+      id: 2,
       label: "Create New",
       path: "/create-new",
       icon: VideoIcon,
     },
     {
-      id: 1,
+      id: 3,
       label: "Upgrade",
       path: "/upgrade",
       icon: ShieldPlusIcon,

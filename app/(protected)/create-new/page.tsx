@@ -11,6 +11,7 @@ import { createAiShortSchema } from "@/lib/zodSchema";
 import { SelectDuration } from "./_components/SelectDuration";
 import { SelectStyle } from "./_components/SelectStyle";
 import { useLoadingStore } from "@/app/store/loading";
+import PlayerDialog from "../_components/PlayerDialog";
 
 export default function CreateNew() {
   const [lastResult, action] = useFormState(CreateAiShortAction, undefined);
@@ -43,6 +44,7 @@ export default function CreateNew() {
           <Button type="submit">Create</Button>
         </form>
       </FormProvider>
+      <PlayerDialog playVideo videoId="cm2r9uxxh0005o147mep9kpki" />
     </div>
   );
 }

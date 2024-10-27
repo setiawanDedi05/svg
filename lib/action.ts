@@ -6,10 +6,14 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { storage } from "./firebaseConfig";
+import { db } from "@/app/server/db";
+import { auth } from "@clerk/nextjs/server";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export async function CreateAiShortAction(prevState: any, formData: FormData) {
+  const { userId } = await auth();
+  console.log({ userId });
   const submission = parseWithZod(formData, {
     schema: createAiShortSchema,
   });
@@ -36,14 +40,18 @@ export async function CreateAiShortAction(prevState: any, formData: FormData) {
 
     const resultCaption = await generateCaption(resultAudio);
 
-    const videoDataScript = {
-      videoScript: resultScript,
-      audioUrl: resultAudio,
-      caption: resultCaption,
-      urlImages,
-    };
-
-    console.log(videoDataScript, "===");
+    if (userId) {
+      const response = await db.videoData.create({
+        data: {
+          script: resultScript,
+          audioUrl: resultAudio,
+          caption: resultCaption,
+          imageList: urlImages,
+          createdBy: userId as string,
+        },
+      });
+      console.log({ response });
+    }
   } catch (error) {
     return null;
   }
