@@ -11,7 +11,7 @@ import { createAiShortSchema } from "@/lib/zodSchema";
 import { SelectDuration } from "./_components/SelectDuration";
 import { SelectStyle } from "./_components/SelectStyle";
 import { useLoadingStore } from "@/app/store/loading";
-import PlayerDialog from "../_components/PlayerDialog";
+import { SubmitButton } from "@/components/ui/submit-button";
 
 export default function CreateNew() {
   const [lastResult, action] = useFormState(CreateAiShortAction, undefined);
@@ -33,7 +33,13 @@ export default function CreateNew() {
     <div className="flex flex-col">
       <h2 className="text-2xl font-bold text-primary">CreateNew</h2>
       <FormProvider context={form.context}>
-        <form action={action} id={form.id} onSubmit={form.onSubmit} noValidate>
+        <form
+          action={action}
+          id={form.id}
+          onSubmit={form.onSubmit}
+          noValidate
+          className="flex flex-col gap-5"
+        >
           {/* select topic */}
           <SelectTopic name={fields.topic.name} formId={form.id} />
           {/* select style */}
@@ -41,10 +47,9 @@ export default function CreateNew() {
           {/* select duration */}
           <SelectDuration name={fields.duration.name} formId={form.id} />
           {/* create button */}
-          <Button type="submit">Create</Button>
+          <SubmitButton text="create" />
         </form>
       </FormProvider>
-      <PlayerDialog playVideo videoId="cm2r9uxxh0005o147mep9kpki" />
     </div>
   );
 }

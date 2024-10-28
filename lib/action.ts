@@ -8,6 +8,7 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { storage } from "./firebaseConfig";
 import { db } from "@/app/server/db";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -52,6 +53,7 @@ export async function CreateAiShortAction(prevState: any, formData: FormData) {
       });
       console.log({ response });
     }
+    return redirect("/dashboard");
   } catch (error) {
     return null;
   }
@@ -137,7 +139,7 @@ const generateCaption = async (audioUrl: string) => {
         url: audioUrl,
       }
     );
-    return response.data;
+    return response.data.result;
   } catch (error) {
     return null;
   }
